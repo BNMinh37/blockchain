@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Xác minh chứng chỉ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f2f6fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        form {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 25px;
+            background: #3498db;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .result.valid {
+            background-color: #dff0d8;
+            border-left: 5px solid #3c763d;
+        }
+
+        .result.invalid {
+            background-color: #f2dede;
+            border-left: 5px solid #a94442;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .result p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Xác minh chứng chỉ bằng mã QR</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="qr_image" accept="image/*" required><br><br>
+            <button type="submit">📷 Xác minh</button>
+        </form>
+
+        <div class="footer-links">
+            <a href="/all">📄 Xem tất cả chứng chỉ</a>
+            &nbsp;|&nbsp;
+            <a href="/search">🔍 Tìm theo tên</a>
+        </div>
+
+        {% if result %}
+            <div class="result {{ 'valid' if result.valid else 'invalid' }}">
+                {% if result.valid %}
+                    <p style="color:#2c3e50;">✅ <strong>Chứng chỉ hợp lệ</strong></p>
+                    <p><strong>Họ tên:</strong> {{ result.student }}</p>
+                    <p><strong>Khóa học:</strong> {{ result.course }}</p>
+                    <p><strong>Tổ chức:</strong> {{ result.institution }}</p>
+                    <p><strong>Ngày cấp:</strong> {{ result.issue_date }}</p>
+                    <p><strong>Mã hash:</strong> {{ result.hash }}</p>
+                {% else %}
+                    <p style="color:#a94442;">❌ <strong>Chứng chỉ không hợp lệ</strong></p>
+                    {% if result.error %}<p>{{ result.error }}</p>{% endif %}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

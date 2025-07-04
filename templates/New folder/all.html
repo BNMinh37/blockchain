@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách chứng chỉ đã cấp</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 25px 35px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th, td {
+            border: 1px solid #e1e1e1;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f3f8;
+            color: #333;
+        }
+
+        td {
+            font-size: 15px;
+        }
+
+        .delete-btn {
+            color: red;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .delete-btn:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .footer-links a {
+            margin: 0 10px;
+            color: #3498db;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .hash {
+            font-size: 14px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📜 Danh sách chứng chỉ đã cấp</h2>
+
+        <table>
+            <tr>
+                <th>STT</th>
+                <th>Họ tên</th>
+                <th>Khóa học</th>
+                <th>Tổ chức</th>
+                <th>Ngày cấp</th>
+                <th>Hash</th>
+                <th>Xóa</th>
+            </tr>
+            {% for block in certificates %}
+            <tr>
+                <td>{{ block.index }}</td>
+                <td>{{ block.data.student }}</td>
+                <td>{{ block.data.course }}</td>
+                <td>{{ block.data.institution }}</td>
+                <td>{{ block.data.issue_date }}</td>
+                <td class="hash">{{ block.hash }}</td>
+                <td><a href="/delete/{{ block.hash }}" class="delete-btn" onclick="return confirm('Bạn có chắc muốn xóa chứng chỉ này?')">❌</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="footer-links">
+            <a href="/">← Trang chính</a> |
+            <a href="/search">🔍 Tìm chứng chỉ</a> |
+            <a href="/download">⬇️ Tải danh sách Excel</a> |
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm kiếm chứng chỉ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        ul {
+            margin-top: 30px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            background-color: #f0f3f8;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .no-result {
+            margin-top: 20px;
+            color: #c0392b;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔍 Tìm kiếm chứng chỉ theo tên học viên</h2>
+        <form method="POST">
+            <input type="text" name="student_name" placeholder="Nhập tên..." value="{{ keyword }}">
+            <button type="submit">Tìm</button>
+        </form>
+
+        {% if results %}
+            <ul>
+                {% for r in results %}
+                    <li>
+                        <strong>Họ tên:</strong> {{ r.data.student }}<br>
+                        <strong>Khóa học:</strong> {{ r.data.course }}<br>
+                        <strong>Tổ chức:</strong> {{ r.data.institution }}<br>
+                        <strong>Ngày cấp:</strong> {{ r.data.issue_date }}<br>
+                        <strong>Hash:</strong> {{ r.hash }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% elif keyword %}
+            <p class="no-result">❌ Không tìm thấy kết quả phù hợp.</p>
+        {% endif %}
+
+        <div class="footer-links">
+            <a href="/">← Trang chính</a> |
+            <a href="/all">📜 Danh sách chứng chỉ</a>
+        </div>
+    </div>
+</body>
+</html>
