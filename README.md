@@ -5,7 +5,7 @@
 |--------------|-------------|
 | **Tác giả** | Bùi Ngọc Minh |
 | **Đơn vị** | Trường Đại học Kinh Doanh Và Công Nghệ Hà Nội |
-| **Đề tài** | Đồ án ứng dụng cấp và xác thực chứng chỉ bằng công nghệ blockchain |
+| **Đề tài** | Đồ án Xây dựng phần mềm cấp và xác minh chứng chỉ trong Blockchain |
 
 ## Giới thiệu
 Đây là một ứng dụng web dùng công nghệ blockchain để cấp phát, lưu trữ và xác minh chứng chỉ học tập.
